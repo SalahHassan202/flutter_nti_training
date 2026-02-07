@@ -1,16 +1,35 @@
-import 'package:api_app/home_page.dart';
-import 'package:flutter/material.dart';
+class NewsModel {
+  final String name;
+  final String? author;
+  final String title;
+  final String? description;
+  final String url;
+  final String? image;
+  final String publishedAt;
+  final String? content;
 
-void main() {
-  runApp(const ApiApp());
-}
+  NewsModel({
+    required this.name,
+    required this.author,
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.image,
+    required this.publishedAt,
+    required this.content,
+  });
 
-class ApiApp extends StatelessWidget {
-  const ApiApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+  factory NewsModel.fromJson(Map<String, dynamic> json) {
+    return NewsModel(
+      name: json['source']?['name'] ?? '',
+      author: json['author'],
+      title: json['title'] ?? '',
+      description: json['description'],
+      url: json['url'] ?? '',
+      image: json['urlToImage'],
+      publishedAt: json['publishedAt'] ?? '',
+      content: json['content'],
+    );
   }
 }
 
